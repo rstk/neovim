@@ -340,7 +340,7 @@ local function make_augroup_key(namespace, bufnr)
 end
 
 --- Table of autocmd events to fire the update for displaying new diagnostic information
-local insert_leave_auto_cmds = { 'InsertLeave', 'CursorHoldI' }
+local insert_leave_auto_cmds = { 'BufWritePost' }
 
 ---@private
 local function schedule_display(namespace, bufnr, args)
@@ -696,7 +696,7 @@ function M.set(namespace, bufnr, diagnostics, opts)
   end
 
   if vim.api.nvim_buf_is_loaded(bufnr) then
-    M.show(namespace, bufnr, nil, opts)
+    -- M.show(namespace, bufnr, nil, opts)
   end
 
   vim.api.nvim_exec_autocmds('DiagnosticChanged', {
